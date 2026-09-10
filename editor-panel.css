@@ -1,0 +1,57 @@
+.editor-panel-hero {
+    background: linear-gradient(180deg, #b7e4a0 0%, var(--bg-deep) 100%);
+  }
+  
+  .field-group-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #333;
+    margin-top: 0.5rem;
+    border-top: 1px solid #eee;
+    padding-top: 0.75rem;
+  }
+  
+  .date-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .date-row label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    flex: 1 1 8rem;
+  }
+  
+  .crud-form.compact {
+    margin-bottom: 1.25rem;
+  }
+  
+  .past-dept-editor {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .past-dept-editor h3 {
+    margin-top: 0;
+    font-size: 1rem;
+  }
+  
+  .recognition-columns {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .recognition-column {
+    flex: 1 1 20rem;
+  }
+  
+  .recognition-column h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }

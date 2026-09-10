@@ -1,0 +1,222 @@
+/* ---------- Navigation ---------- */
+.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: var(--curtain);
+    border-bottom: 1px solid var(--curtain-light);
+  }
+  
+  .nav-brand {
+    font-family: 'Anton', sans-serif;
+    color: var(--spotlight);
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--spotlight);
+  }
+  
+  .nav-links a.active {
+    color: var(--spotlight);
+    border-color: var(--spotlight);
+  }
+  
+  /* ---------- Home hero ---------- */
+  .home-hero {
+    position: relative;
+    text-align: center;
+    padding: 6rem 1.5rem 4rem;
+    background-image:
+      linear-gradient(180deg, rgba(21, 10, 36, 0.6) 0%, rgba(21, 10, 36, 0.8) 60%, var(--bg-deep) 100%),
+      url("rtsbackground2.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .home-hero .show-title {
+    font-size: clamp(2.4rem, 7vw, 4.5rem);
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .home-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin: 0.75rem 0 1.5rem;
+  }
+  
+  .gold-divider {
+    width: 6rem;
+    height: 4px;
+    background: var(--spotlight);
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+  
+  /* ---------- Staff recognition (gold) ---------- */
+  .staff-section {
+    background: var(--spotlight);
+    color: var(--bg-deep);
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+  
+  .staff-section h2 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin: 0 0 2.5rem;
+  }
+  
+  .staff-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+  
+  .staff-box {
+    flex: 1 1 22rem;
+    background: var(--bg-deep);
+    color: var(--text-light);
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+  
+  .staff-box h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+    color: var(--spotlight);
+  }
+  
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .staff-slot {
+    aspect-ratio: 1;
+    border: 2px dashed var(--curtain-light);
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    .staff-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  /* ---------- Recent media (blue) ---------- */
+  .media-section {
+    background: #24407a;
+    color: var(--text-light);
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+  
+  .media-section h2 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin: 0 0 2.5rem;
+  }
+  
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+  
+  .media-slot {
+    aspect-ratio: 1;
+    border: 2px dashed rgba(243, 236, 255, 0.4);
+    border-radius: 12px;
+  }
+  
+  @media (max-width: 700px) {
+    .media-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  /* ---------- Newspapers (light green) ---------- */
+  .news-section {
+    background: #b7e4a0;
+    color: var(--bg-deep);
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+  
+  .news-section h2 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin: 0 0 2.5rem;
+  }
+  
+  .news-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .news-slot {
+    width: 12rem;
+    aspect-ratio: 3 / 4;
+    border: 2px dashed rgba(21, 10, 36, 0.35);
+    border-radius: 8px;
+  }
+  .staff-slot.filled,
+.media-slot.filled,
+.news-slot.filled {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+.staff-slot.filled img { width: 3rem; height: 3rem; border-radius: 50%; object-fit: cover; }
+.media-slot.filled img,
+.news-slot.filled img { width: 100%; height: 70%; object-fit: cover; border-radius: 8px 8px 0 0; }
+.staff-slot.filled span,
+.media-slot.filled span,
+.news-slot.filled span { font-size: 0.8rem; text-align: center; }

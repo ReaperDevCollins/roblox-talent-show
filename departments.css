@@ -1,0 +1,158 @@
+.departments-hero {
+    background-image:
+      linear-gradient(180deg, rgba(21, 10, 36, 0.6) 0%, rgba(21, 10, 36, 0.85) 60%, var(--bg-deep) 100%),
+      url("trials.png");
+  }
+  
+  .departments-section {
+    background: #d9d9d9;
+    padding: 4rem 1.5rem;
+  }
+  
+  .department-grid {
+    max-width: 70rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 900px) {
+    .department-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .department-grid { grid-template-columns: 1fr; }
+  }
+  
+  /* ---------- Department card ---------- */
+  .dept-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  
+  .dept-card:hover,
+  .dept-card:focus-visible {
+    transform: translateY(-3px);
+  }
+  
+  .dept-card .dept-logo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 2px dashed rgba(21, 10, 36, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.3rem;
+    margin: 0 auto 1rem;
+    color: var(--bg-deep);
+  }
+  
+  .dept-card .dept-name {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: 1.15rem;
+    color: var(--bg-deep);
+    margin-bottom: 0.5rem;
+  }
+  
+  .dept-card .dept-heads {
+    font-size: 0.88rem;
+    color: #555;
+  }
+  
+  /* ---------- Department modal ---------- */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(21, 10, 36, 0.75);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  
+  .modal-overlay.open { display: flex; }
+  
+  .department-modal {
+    position: relative;
+    border-radius: 16px;
+    max-width: 30rem;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2.5rem 1.75rem 2rem;
+    text-align: center;
+    color: var(--bg-deep);
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--bg-deep);
+  }
+  
+  .department-modal .dept-logo-large {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    border: 2px dashed rgba(21, 10, 36, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 1.8rem;
+    margin: 0 auto 1rem;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  
+  .department-modal .dept-name-large {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: 1.7rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .department-modal .field-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(21, 10, 36, 0.15);
+    text-align: left;
+  }
+  
+  .department-modal .field-row .label { opacity: 0.75; }
+  .department-modal .field-row .value { font-weight: 700; text-align: right; }
+  
+  .department-modal .full-divider {
+    border: none;
+    border-top: 3px solid var(--spotlight);
+    margin: 1.5rem 0;
+  }
+  
+  .department-modal h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+    text-align: left;
+  }
+  
+  .department-modal .senior-note {
+    text-align: left;
+    font-size: 0.9rem;
+    opacity: 0.75;
+  }

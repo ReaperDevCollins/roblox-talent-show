@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Talent Show - Staff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="homepage.css">
+<link rel="stylesheet" href="faq.css">
+<link rel="stylesheet" href="staff.css">
+<link rel="stylesheet" href="announcement-banner.css">
+</head>
+<body>
+
+<div id="announcement-banner" class="announcement-banner" style="display:none;"></div>
+
+<nav class="site-nav">
+  <div class="nav-brand">RTS</div>
+  <ul class="nav-links">
+    <li><a href="homepage.html">Home</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="editors.html">Editors</a></li>
+    <li><a href="staff.html" class="active">RTS Staff</a></li>
+    <li><a href="departments.html">Departments</a></li>
+    <li><a href="admin-login.html">Admin Panel</a></li>
+    <li><a href="editor-login.html">Editor Panel</a></li>
+  </ul>
+</nav>
+
+<header class="page-hero staff-hero">
+  <h1 class="show-title">Roblox Talent Show</h1>
+  <p class="home-subtitle">Roblox Talent Show Staff</p>
+  <div class="gold-divider"></div>
+</header>
+
+<section class="stats-search-section">
+  <div class="stat-boxes" id="stat-boxes"></div>
+
+  <div class="controls-bar">
+    <input type="text" id="search-input" class="search-input" placeholder="Search by username...">
+
+    <select id="filter-department" class="filter-select">
+      <option value="">All departments</option>
+    </select>
+
+    <select id="filter-status" class="filter-select">
+      <option value="">All statuses</option>
+      <option value="Active">Active</option>
+      <option value="Resigned">Resigned</option>
+      <option value="Terminated">Terminated</option>
+      <option value="Unknown">Unknown</option>
+    </select>
+
+    <select id="filter-rank" class="filter-select">
+      <option value="">All ranks</option>
+    </select>
+
+    <select id="filter-year" class="filter-select">
+      <option value="">All years</option>
+    </select>
+  </div>
+</section>
+
+<div id="department-sections"></div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="employee-modal" id="employee-modal">
+    <button class="modal-close" id="modal-close" aria-label="Close employee file">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Roblox Talent Show. Created by ReaperDevCollins.</p>
+</footer>
+
+<script type="module" src="announcement-banner.js"></script>
+<script type="module" src="staff.js"></script>
+</body>
+</html>

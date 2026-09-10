@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Talent Show - Departments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="homepage.css">
+<link rel="stylesheet" href="faq.css">
+<link rel="stylesheet" href="departments.css">
+<link rel="stylesheet" href="announcement-banner.css">
+</head>
+<body>
+
+<div id="announcement-banner" class="announcement-banner" style="display:none;"></div>
+
+<nav class="site-nav">
+  <div class="nav-brand">RTS</div>
+  <ul class="nav-links">
+    <li><a href="homepage.html">Home</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="editors.html">Editors</a></li>
+    <li><a href="staff.html">RTS Staff</a></li>
+    <li><a href="departments.html" class="active">Departments</a></li>
+    <li><a href="admin-login.html">Admin Panel</a></li>
+    <li><a href="editor-login.html">Editor Panel</a></li>
+  </ul>
+</nav>
+
+<header class="page-hero departments-hero">
+  <h1 class="show-title">Roblox Talent Show</h1>
+  <p class="home-subtitle">Departments</p>
+  <div class="gold-divider"></div>
+</header>
+
+<section class="departments-section">
+  <div class="department-grid" id="department-grid">
+    <p class="crud-empty">Loading departments...</p>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="department-modal" id="department-modal">
+    <button class="modal-close" id="modal-close" aria-label="Close department file">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Roblox Talent Show. Created by ReaperDevCollins.</p>
+</footer>
+
+<script type="module" src="announcement-banner.js"></script>
+<script type="module" src="departments.js"></script>
+</body>
+</html>

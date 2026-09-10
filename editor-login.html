@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Talent Show - Editor Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-brand">RTS</div>
+  <ul class="nav-links">
+    <li><a href="homepage.html">Home</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="editors.html">Editors</a></li>
+    <li><a href="staff.html">RTS Staff</a></li>
+    <li><a href="departments.html">Departments</a></li>
+    <li><a href="admin-login.html">Admin Panel</a></li>
+    <li><a href="editor-login.html" class="active">Editor Panel</a></li>
+  </ul>
+</nav>
+
+<section class="login-section">
+  <form class="login-card" id="login-form">
+    <h1>Editor Login</h1>
+    <label for="email">Gmail</label>
+    <input type="email" id="email" required placeholder="you@gmail.com">
+    <label for="password">Password</label>
+    <input type="password" id="password" required placeholder="••••••••">
+    <button type="submit">Log in</button>
+    <p class="login-error" id="login-error"></p>
+  </form>
+</section>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Roblox Talent Show. Created by ReaperDevCollins.</p>
+</footer>
+
+<script type="module">
+  import { loginWithRole } from './auth-guard.js';
+
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const errorEl = document.getElementById('login-error');
+    errorEl.textContent = '';
+
+    const result = await loginWithRole(email, password, ['editor','admin', 'super_admin']);
+    if (result.success) {
+      window.location.href = 'editor-panel.html';
+    } else {
+      errorEl.textContent = result.message;
+    }
+  });
+</script>
+</body>
+</html>

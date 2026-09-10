@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Talent Show - Admin Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="homepage.css">
+<link rel="stylesheet" href="faq.css">
+<link rel="stylesheet" href="admin-panel.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-brand">RTS</div>
+  <ul class="nav-links">
+    <li><a href="homepage.html">Home</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="editors.html">Editors</a></li>
+    <li><a href="staff.html">RTS Staff</a></li>
+    <li><a href="departments.html">Departments</a></li>
+    <li><a href="admin-panel.html" class="active">Admin Panel</a></li>
+    <li><a href="editor-login.html">Editor Panel</a></li>
+  </ul>
+  <button id="logout-btn" class="logout-btn">Log out</button>
+</nav>
+
+<header class="page-hero admin-hero">
+  <h1 class="show-title">Roblox Talent Show</h1>
+  <p class="home-subtitle">Admin Panel</p>
+  <div class="gold-divider"></div>
+</header>
+
+<section class="panel-body">
+  <div class="panel-tabs" id="panel-tabs">
+    <button class="tab-btn active" data-tab="announcement">Announcement</button>
+    <button class="tab-btn" data-tab="ranks">Ranks</button>
+    <button class="tab-btn" data-tab="departments">Departments</button>
+    <button class="tab-btn" data-tab="statuses">Statuses</button>
+    <button class="tab-btn" data-tab="editor-bios">Editor Management</button>
+    <button class="tab-btn" data-tab="social">Social Media</button>
+    <button class="tab-btn" data-tab="newspapers">Newspapers</button>
+    <button class="tab-btn" data-tab="faqs">FAQ</button>
+    <button class="tab-btn super-only" data-tab="editor-permissions" style="display:none;">Editor Permissions</button>
+  </div>
+
+  <!-- Announcement -->
+  <div class="tab-panel active" id="tab-announcement">
+    <h2>Website announcement</h2>
+    <p class="panel-hint">This appears as a red banner at the top of every page while active.</p>
+    <form id="announcement-form" class="crud-form">
+      <input type="text" name="title" placeholder="Announcement title" required>
+      <textarea name="message" placeholder="Announcement message" required></textarea>
+      <div class="form-actions">
+        <button type="submit" class="crud-submit">Publish announcement</button>
+        <button type="button" id="clear-announcement" class="secondary-btn">Clear active announcement</button>
+      </div>
+    </form>
+    <p id="announcement-status" class="panel-hint"></p>
+  </div>
+
+  <!-- Ranks -->
+  <div class="tab-panel" id="tab-ranks">
+    <h2>Rank management</h2>
+    <form id="ranks-form" class="crud-form">
+      <input type="text" name="name" placeholder="Rank name" required>
+      <label class="color-label">Color <input type="color" name="color" value="#f5c946"></label>
+      <input type="text" name="icon_url" placeholder="Icon URL (optional)">
+      <input type="number" name="sort_order" placeholder="Sort order" value="0">
+      <button type="submit" class="crud-submit">Add</button>
+    </form>
+    <div class="crud-list" id="ranks-list"></div>
+  </div>
+
+  <!-- Departments -->
+  <div class="tab-panel" id="tab-departments">
+    <h2>Department management</h2>
+    <form id="departments-form" class="crud-form">
+      <input type="text" name="name" placeholder="Department name" required>
+      <input type="text" name="logo_url" placeholder="Logo URL">
+      <label class="color-label">Color <input type="color" name="color" value="#a3e0a3"></label>
+      <input type="text" name="heads" placeholder="Head(s)" value="TBA">
+      <label class="date-label">Creation date <input type="date" name="creation_date"></label>
+      <label class="checkbox-label"><input type="checkbox" name="hidden"> Hide from Departments page</label>
+      <input type="number" name="sort_order" placeholder="Sort order" value="0">
+      <button type="submit" class="crud-submit">Add</button>
+    </form>
+    <div class="crud-list" id="departments-list"></div>
+  </div>
+
+  <!-- Statuses -->
+  <div class="tab-panel" id="tab-statuses">
+    <h2>Status management</h2>
+    <form id="statuses-form" class="crud-form">
+      <input type="text" name="name" placeholder="Status name (e.g. Active)" required>
+      <label class="color-label">Color <input type="color" name="color" value="#a3e0a3"></label>
+      <button type="submit" class="crud-submit">Add</button>
+    </form>
+    <div class="crud-list" id="statuses-list"></div>
+  </div>
+
+  <!-- Editor bios -->
+  <div class="tab-panel" id="tab-editor-bios">
+    <h2>Editor management</h2>
+    <p class="panel-hint">Shown on the cover page and Editors page. This is separate from login access — see Editor Permissions for that.</p>
+    <form id="editor-bios-form" class="crud-form">
+      <input type="text" name="name" placeholder="Editor name" required>
+      <input type="text" name="photo_url" placeholder="Photo URL">
+      <textarea name="bio" placeholder="Short bio"></textarea>
+      <input type="number" name="sort_order" placeholder="Sort order" value="0">
+      <button type="submit" class="crud-submit">Add</button>
+    </form>
+    <div class="crud-list" id="editor-bios-list"></div>
+  </div>
+
+  <!-- Social media -->
+  <div class="tab-panel" id="tab-social">
+    <h2>Social media management</h2>
+    <form id="social-form" class="crud-form">
+      <input type="text" name="title" placeholder="Post title" required>
+      <input type="url" name="link" placeholder="Post link" required>
+      <input type="text" name="thumbnail_url" placeholder="Thumbnail URL">
+      <input type="number" name="sort_order" placeholder="Sort order" value="0">
+      <button type="submit" class="crud-submit">Add</button>
+    </form>
+    <div class="crud-list" id="social-list"></div>
+  </div>
+
+  <!-- Newspapers -->
+  <div class="tab-panel" id="tab-newspapers">
+    <h2>Newspaper management</h2>
+    <form id="newspapers-form" class="crud-form">
+      <input type="text" name="title" placeholder="Newspaper title" required>
+      <input type="url" name="link" placeholder="Newspaper link" required>
+      <input type="text" name="thumbnail_url" placeholder="Thumbnail URL">
+      <button type="submit" class="crud-submit">Add</button>
+    </form>
+    <div class="crud-list" id="newspapers-list"></div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="tab-panel" id="tab-faqs">
+    <h2>FAQ management</h2>
+    <form id="faqs-form" class="crud-form">
+      <input type="text" name="question" placeholder="Question" required>
+      <textarea name="answer" placeholder="Answer" required></textarea>
+      <input type="number" name="sort_order" placeholder="Sort order" value="0">
+      <button type="submit" class="crud-submit">Add</button>
+    </form>
+    <div class="crud-list" id="faqs-list"></div>
+  </div>
+
+  <!-- Editor permissions (super_admin only) -->
+  <div class="tab-panel" id="tab-editor-permissions">
+    <h2>Editor permissions</h2>
+    <p class="panel-hint">Controls who can log into the Admin or Editor panel. Only your account can access this section.</p>
+    <form id="editor-permissions-form" class="crud-form">
+      <input type="email" name="email" placeholder="Gmail" required>
+      <input type="password" name="password" placeholder="Password (min 6 characters)" required minlength="6">
+      <select name="role">
+        <option value="editor">Editor</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="submit" class="crud-submit">Create account</button>
+    </form>
+    <p id="permissions-status" class="panel-hint"></p>
+    <div class="crud-list" id="editor-permissions-list"></div>
+  </div>
+
+</section>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Roblox Talent Show. Created by ReaperDevCollins.</p>
+</footer>
+
+<script type="module" src="admin-panel.js"></script>
+</body>
+</html>

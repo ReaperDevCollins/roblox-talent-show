@@ -1,0 +1,211 @@
+:root {
+    --bg-deep: #150a24;
+    --curtain: #341a52;
+    --curtain-light: #4b2470;
+    --spotlight: #f5c946;
+    --spotlight-soft: rgba(245, 201, 70, 0.35);
+    --magenta: #ff3e7f;
+    --text-light: #f3ecff;
+    --text-muted: #c4b3e0;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    background: var(--bg-deep);
+    color: var(--text-light);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .stage-glow {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    width: 140vw;
+    height: 90vh;
+    transform: translateX(-50%);
+    background: radial-gradient(circle at 50% 30%, var(--spotlight-soft) 0%, var(--curtain) 45%, var(--bg-deep) 75%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6vh 1.5rem;
+  
+    background-image:
+      linear-gradient(180deg, rgba(21, 10, 36, 0.55) 0%, rgba(21, 10, 36, 0.75) 55%, var(--bg-deep) 100%),
+      url("background.jpg");
+    background-size: cover;
+    background-position: center 30%;
+  }
+  
+  .hero-kicker {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    margin: 0 0 1rem;
+  }
+  
+  .show-title {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 11vw, 7.5rem);
+    line-height: 0.95;
+    margin: 0;
+    color: var(--spotlight);
+    text-shadow: 0 0 40px var(--spotlight-soft);
+    opacity: 0;
+    transform: translateY(18px);
+    animation: rise 0.9s ease-out 0.15s forwards;
+  }
+  
+  .tagline {
+    max-width: 34rem;
+    margin: 1.5rem 0 2.5rem;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  
+  .enter-btn {
+    display: inline-block;
+    background: var(--spotlight);
+    color: var(--bg-deep);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.9rem 2.2rem;
+    border-radius: 999px;
+    font-size: 1.05rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .enter-btn:hover,
+  .enter-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px var(--spotlight-soft);
+  }
+  
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* ---------- Stats ---------- */
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    background: var(--curtain);
+    padding: 4rem 1.5rem;
+    border-top: 1px solid var(--curtain-light);
+    border-bottom: 1px solid var(--curtain-light);
+  }
+  
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 10rem;
+  }
+  
+  .stat-number {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    color: var(--magenta);
+  }
+  
+  .stat-label {
+    margin-top: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  
+  /* ---------- Editors ---------- */
+  .editors {
+    position: relative;
+    text-align: center;
+    padding: 5rem 1.5rem;
+  
+    background-image:
+      linear-gradient(180deg, var(--bg-deep) 0%, rgba(52, 26, 82, 0.85) 25%, rgba(52, 26, 82, 0.85) 75%, var(--bg-deep) 100%),
+      url("rtsbackground3.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .editors h2 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--text-light);
+    margin: 0 0 0.75rem;
+  }
+  
+  .editors-note {
+    color: var(--text-muted);
+    max-width: 30rem;
+    margin: 0 auto 2.5rem;
+  }
+  
+  .editor-placeholders {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .editor-slot {
+    width: 8rem;
+    height: 8rem;
+    border: 2px dashed var(--curtain-light);
+    border-radius: 12px;
+  }
+  
+  /* ---------- Footer ---------- */
+  .site-footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--curtain);
+  }
+  
+  @media (max-width: 600px) {
+    .stats { gap: 2rem; padding: 3rem 1rem; }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .show-title { animation: none; opacity: 1; transform: none; }
+  }
+  .editor-slot.filled {
+    border: none;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .editor-slot.filled img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .editor-slot.filled span {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }

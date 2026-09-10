@@ -1,0 +1,153 @@
+.admin-hero {
+    background: linear-gradient(180deg, #8a2b2b 0%, var(--bg-deep) 100%);
+  }
+  
+  .logout-btn {
+    background: none;
+    border: 1px solid var(--text-muted);
+    color: var(--text-light);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  
+  .panel-body {
+    background: #d9d9d9;
+    color: var(--bg-deep);
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  
+  .panel-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 60rem;
+    margin: 0 auto 2rem;
+  }
+  
+  .tab-btn {
+    background: #fff;
+    border: none;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  
+  .tab-btn.active {
+    background: var(--spotlight);
+  }
+  
+  .tab-panel { display: none; max-width: 45rem; margin: 0 auto; }
+  .tab-panel.active { display: block; }
+  
+  .tab-panel h2 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+  
+  .panel-hint {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .crud-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+  
+  .crud-form input,
+  .crud-form select,
+  .crud-form textarea {
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+  }
+  
+  .color-label,
+  .date-label,
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .checkbox-label input { width: auto; }
+  
+  .form-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  
+  .crud-submit {
+    background: var(--bg-deep);
+    color: #fff;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .secondary-btn {
+    background: none;
+    border: 1px solid var(--bg-deep);
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .crud-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  
+  .crud-row {
+    background: #fff;
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .crud-row-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    font-size: 0.85rem;
+  }
+  
+  .swatch {
+    display: inline-block;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 0.3rem;
+  }
+  
+  .crud-row-actions button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+  }
+  
+  .edit-btn { color: #144214; background: #dff0d8; }
+  .delete-btn { color: #521212; background: #f5d5d5; }
+  
+  .crud-empty { color: #777; font-size: 0.9rem; }
