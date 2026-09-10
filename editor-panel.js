@@ -35,6 +35,8 @@ async function loadReferenceData() {
   fillSelect('secondary-dept-select', departments, 'None');
   fillSelect('secondary-rank-select', ranks, 'None');
   fillSelect('past-dept-status-select', statuses, 'Select status');
+  fillSelect('past-dept-rank-select', ranks, 'Select former rank');
+  fillSelect('past-dept-department-select', departments, 'Select department');
 }
 
 function fillSelect(id, items, placeholder) {
@@ -172,7 +174,7 @@ staffForm.addEventListener('submit', async (e) => {
 async function loadPastDepartments(staffId) {
   const { data, error } = await supabase
     .from('staff_past_departments')
-    .select('*, status:status_id(name, color)')
+    .select('*, status:status_id(name, color), former_rank:former_rank_id(name, icon_url), department:department_id(name, logo_url, color)')
     .eq('staff_id', staffId)
     .order('term_start');
 
@@ -183,8 +185,8 @@ async function loadPastDepartments(staffId) {
   pastDeptList.innerHTML = data.map((p) => `
     <div class="crud-row" data-id="${p.id}">
       <div class="crud-row-info">
-        <span><strong>${p.department_name}</strong></span>
-        <span>${p.former_rank}</span>
+        <span><strong>${p.department?.name || 'Unknown department'}</strong></span>
+        <span>${p.former_rank?.name || 'No rank'}</span>
         <span><span class="swatch" style="background:${p.status?.color || '#ccc'}"></span>${p.status?.name || 'No status'}</span>
         <span>${p.term_start} - ${p.term_end || 'Current'}</span>
       </div>
@@ -210,8 +212,8 @@ pastDeptForm.addEventListener('submit', async (e) => {
 
   const { error } = await supabase.from('staff_past_departments').insert({
     staff_id: editingStaffId,
-    department_name: pastDeptForm.department_name.value,
-    former_rank: pastDeptForm.former_rank.value,
+    department_id: pastDeptForm.department_id.value,
+    former_rank_id: pastDeptForm.former_rank_id.value,
     status_id: pastDeptForm.status_id.value,
     term_start: pastDeptForm.term_start.value,
     term_end: pastDeptForm.term_end.value || null,
