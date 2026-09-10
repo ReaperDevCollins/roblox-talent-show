@@ -150,7 +150,7 @@ function renderDepartmentSections(staffList) {
     section.innerHTML = `
       <div class="department-header">
         <div class="department-logo">
-          ${dept.logo_url ? `<img src="${dept.logo_url}" alt="${dept.name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">` : deptInitial(dept.name)}
+          ${dept.logo_url ? `<img src="${dept.logo_url}" alt="${dept.name}">` : deptInitial(dept.name)}
         </div>
         <h2>${dept.name}</h2>
       </div>
@@ -177,24 +177,24 @@ function fieldRow(label, value) {
   return `<div class="field-row"><span class="label">${label}</span><span class="value">${value}</span></div>`;
 }
 
+function logoRow(label, name, logoUrl, color) {
+  const logoHtml = logoUrl
+    ? `<span class="mini-logo"><img src="${logoUrl}" alt="${name} logo"></span>`
+    : `<span class="mini-logo" style="background:${color || '#ccc'}33;">${deptInitial(name)}</span>`;
+  return `<div class="field-row"><span class="label">${label}</span><span class="value modal-logo-row">${logoHtml}${name}</span></div>`;
+}
+
+function rankRow(label, rank) {
+  const iconHtml = rank?.icon_url
+    ? `<span class="mini-logo"><img src="${rank.icon_url}" alt="${rank.name} icon"></span>`
+    : '';
+  return `<div class="field-row"><span class="label">${label}</span><span class="value modal-logo-row">${iconHtml}${rank?.name || '—'}</span></div>`;
+}
+
 async function openModal(staff) {
   const pic = staff.profile_pic_url
     ? `<img class="profile-pic" src="${staff.profile_pic_url}" alt="${staff.username}">`
     : `<div class="profile-pic" style="display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;">?</div>`;
-
-  function logoRow(label, name, logoUrl, color) {
-    const logoHtml = logoUrl
-      ? `<span class="mini-logo"><img src="${logoUrl}" alt="${name} logo"></span>`
-      : `<span class="mini-logo" style="background:${color || '#ccc'}33;">${deptInitial(name)}</span>`;
-    return `<div class="field-row"><span class="label">${label}</span><span class="value modal-logo-row">${logoHtml}${name}</span></div>`;
-  }
-
-  function rankRow(label, rank) {
-    const iconHtml = rank?.icon_url
-      ? `<span class="mini-logo"><img src="${rank.icon_url}" alt="${rank.name} icon"></span>`
-      : '';
-    return `<div class="field-row"><span class="label">${label}</span><span class="value modal-logo-row">${iconHtml}${rank?.name || '—'}</span></div>`;
-  }
 
   let html = `
     ${pic}
@@ -223,26 +223,26 @@ async function openModal(staff) {
   html += `<hr class="full-divider"><h3>Past departments</h3>`;
 
   const { data: pastDepts } = await supabase
-  .from('staff_past_departments')
-  .select('*, status:status_id(name, color)')
-  .eq('staff_id', staff.id)
-  .order('term_start');
+    .from('staff_past_departments')
+    .select('*, status:status_id(name, color), former_rank:former_rank_id(name, icon_url), department:department_id(name, logo_url, color)')
+    .eq('staff_id', staff.id)
+    .order('term_start');
 
-if (pastDepts && pastDepts.length) {
-  pastDepts.forEach((p) => {
-    html += `
-      <div class="past-department-entry">
-        ${fieldRow('Department name', p.department_name)}
-        ${fieldRow('Former rank', p.former_rank)}
-        ${fieldRow('Status', `<span class="status-badge" style="background:${p.status?.color || '#ccc'}22;color:${p.status?.color || '#333'};">${p.status?.name || 'Unknown'}</span>`)}
-        ${fieldRow('Term', formatTerm(p.term_start, p.term_end))}
-        ${fieldRow('Total days', totalDays(p.term_start, p.term_end))}
-      </div>
-    `;
-  });
-} else {
-  html += `<p class="notes-text">No past departments on file.</p>`;
-}
+  if (pastDepts && pastDepts.length) {
+    pastDepts.forEach((p) => {
+      html += `
+        <div class="past-department-entry">
+          ${logoRow('Department name', p.department?.name || 'Unknown', p.department?.logo_url, p.department?.color)}
+          ${rankRow('Former rank', p.former_rank)}
+          ${fieldRow('Status', `<span class="status-badge" style="background:${p.status?.color || '#ccc'}22;color:${p.status?.color || '#333'};">${p.status?.name || 'Unknown'}</span>`)}
+          ${fieldRow('Term', formatTerm(p.term_start, p.term_end))}
+          ${fieldRow('Total days', totalDays(p.term_start, p.term_end))}
+        </div>
+      `;
+    });
+  } else {
+    html += `<p class="notes-text">No past departments on file.</p>`;
+  }
 
   html += `<hr class="full-divider"><h3>Notes</h3><p class="notes-text">${staff.notes || 'No notes on file.'}</p>`;
 
