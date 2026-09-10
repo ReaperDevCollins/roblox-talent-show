@@ -82,7 +82,6 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    border: 2px dashed rgba(21, 10, 36, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,6 +90,13 @@
     color: var(--bg-deep);
     background: rgba(255, 255, 255, 0.35);
     flex-shrink: 0;
+    overflow: hidden;
+  }
+  
+  .department-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   
   .department-header h2 {
@@ -183,12 +189,24 @@
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-    border: 1px dashed rgba(21, 10, 36, 0.5);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 0.55rem;
     flex-shrink: 0;
+    overflow: hidden;
+  }
+  
+  .mini-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .modal-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   
   .secondary-divider {
@@ -261,7 +279,12 @@
   
   .employee-modal .field-row .label { color: #666; }
   .employee-modal .field-row .value { font-weight: 600; text-align: right; }
-  
+  .employee-modal .field-row .label { color: #666; }
+.employee-modal .field-row .value { font-weight: 600; text-align: right; }
+
+.field-row .value .status-badge {
+  display: inline-block;
+}
   .full-divider {
     border: none;
     border-top: 3px solid var(--spotlight);
