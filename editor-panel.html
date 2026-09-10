@@ -92,18 +92,18 @@
     </form>
 
     <!-- Past departments editor, appears only while editing an existing staff member -->
-    <div id="past-departments-editor" class="past-dept-editor" style="display:none;">
-      <h3>Past departments for this staff member</h3>
-      <div id="past-departments-list" class="crud-list"></div>
-      <form id="past-department-form" class="crud-form compact">
-        <input type="text" name="department_name" placeholder="Department name" required>
-        <input type="text" name="former_rank" placeholder="Former rank" required>
-        <div class="date-row">
-          <label>Start <input type="date" name="term_start" required></label>
-          <label>End <input type="date" name="term_end"></label>
-        </div>
-        <button type="submit" class="crud-submit">Add past department</button>
-      </form>
+    <form id="past-department-form" class="crud-form compact">
+      <input type="text" name="department_name" placeholder="Department name" required>
+      <input type="text" name="former_rank" placeholder="Former rank" required>
+      <select name="status_id" id="past-dept-status-select" required>
+        <option value="">Select status</option>
+      </select>
+      <div class="date-row">
+        <label>Start <input type="date" name="term_start" required></label>
+        <label>End <input type="date" name="term_end"></label>
+      </div>
+      <button type="submit" class="crud-submit">Add past department</button>
+    </form>
     </div>
 
     <div class="crud-list" id="staff-list"></div>
