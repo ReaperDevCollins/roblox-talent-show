@@ -34,6 +34,7 @@ async function loadReferenceData() {
   fillSelect('primary-rank-select', ranks, 'Select rank');
   fillSelect('secondary-dept-select', departments, 'None');
   fillSelect('secondary-rank-select', ranks, 'None');
+  fillSelect('past-dept-status-select', statuses, 'Select status');
 }
 
 function fillSelect(id, items, placeholder) {
@@ -171,7 +172,7 @@ staffForm.addEventListener('submit', async (e) => {
 async function loadPastDepartments(staffId) {
   const { data, error } = await supabase
     .from('staff_past_departments')
-    .select('*')
+    .select('*, status:status_id(name, color)')
     .eq('staff_id', staffId)
     .order('term_start');
 
@@ -184,6 +185,7 @@ async function loadPastDepartments(staffId) {
       <div class="crud-row-info">
         <span><strong>${p.department_name}</strong></span>
         <span>${p.former_rank}</span>
+        <span><span class="swatch" style="background:${p.status?.color || '#ccc'}"></span>${p.status?.name || 'No status'}</span>
         <span>${p.term_start} - ${p.term_end || 'Current'}</span>
       </div>
       <div class="crud-row-actions">
@@ -210,6 +212,7 @@ pastDeptForm.addEventListener('submit', async (e) => {
     staff_id: editingStaffId,
     department_name: pastDeptForm.department_name.value,
     former_rank: pastDeptForm.former_rank.value,
+    status_id: pastDeptForm.status_id.value,
     term_start: pastDeptForm.term_start.value,
     term_end: pastDeptForm.term_end.value || null,
   });
