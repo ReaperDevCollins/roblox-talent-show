@@ -141,7 +141,9 @@ function renderDepartmentSections(staffList) {
   container.innerHTML = '';
 
   departments.forEach((dept) => {
-    const members = staffList.filter((s) => s.primary_department_id === dept.id);
+    const members = staffList
+      .filter((s) => s.primary_department_id === dept.id)
+      .sort((a, b) => new Date(a.term_start) - new Date(b.term_start));
 
     const section = document.createElement('section');
     section.className = 'department-section';
