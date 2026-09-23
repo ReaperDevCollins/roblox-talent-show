@@ -262,3 +262,108 @@ if (role === 'super_admin') {
 
   loadEditorAccounts();
 }
+
+/* ---------- Staff Memories (photo + tagged staff, many-to-many) ---------- */
+async function initStaffMemories() {
+  const form = document.getElementById('memories-form');
+  const listEl = document.getElementById('memories-list');
+  const checkboxContainer = document.getElementById('memory-staff-checkboxes');
+  let editingId = null;
+
+  const { data: allStaffForTagging } = await supabase.from('staff').select('id, username').order('username');
+
+  checkboxContainer.innerHTML = (allStaffForTagging || []).map((s) => `
+    <label><input type="checkbox" value="${s.id}"> ${s.username}</label>
+  `).join('');
+
+  async function load() {
+    const { data, error } = await supabase
+      .from('staff_memories')
+      .select('*, tags:staff_memories_tags(staff_id, staff:staff_id(username))')
+      .order('date_taken', { ascending: false });
+
+    if (error) { listEl.innerHTML = `<p class="crud-empty">${error.message}</p>`; return; }
+    render(data || []);
+  }
+
+  function render(rows) {
+    if (!rows.length) { listEl.innerHTML = '<p class="crud-empty">No memories added yet.</p>'; return; }
+
+    listEl.innerHTML = rows.map((row) => `
+      <div class="crud-row" data-id="${row.id}">
+        <div class="crud-row-info">
+          <span><strong>${row.date_taken}</strong></span>
+          <span>${(row.tags || []).map((t) => t.staff?.username).filter(Boolean).join(', ') || 'No one tagged'}</span>
+        </div>
+        <div class="crud-row-actions">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      </div>
+    `).join('');
+
+    listEl.querySelectorAll('.crud-row').forEach((rowEl) => {
+      const row = rows.find((r) => r.id === rowEl.dataset.id);
+
+      rowEl.querySelector('.edit-btn').addEventListener('click', () => {
+        editingId = row.id;
+        form.image_url.value = row.image_url;
+        form.date_taken.value = row.date_taken;
+        form.sort_order.value = row.sort_order;
+
+        const taggedIds = (row.tags || []).map((t) => t.staff_id);
+        checkboxContainer.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+          cb.checked = taggedIds.includes(cb.value);
+        });
+
+        form.querySelector('.crud-submit').textContent = 'Save changes';
+        form.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      rowEl.querySelector('.delete-btn').addEventListener('click', async () => {
+        if (!confirm('Delete this memory? This cannot be undone.')) return;
+        await supabase.from('staff_memories').delete().eq('id', row.id);
+        load();
+      });
+    });
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      image_url: form.image_url.value,
+      date_taken: form.date_taken.value,
+      sort_order: Number(form.sort_order.value) || 0,
+    };
+
+    let memoryId = editingId;
+
+    if (editingId) {
+      const { error } = await supabase.from('staff_memories').update(payload).eq('id', editingId);
+      if (error) { alert(`Error: ${error.message}`); return; }
+      await supabase.from('staff_memories_tags').delete().eq('memory_id', editingId);
+    } else {
+      const { data, error } = await supabase.from('staff_memories').insert(payload).select().single();
+      if (error) { alert(`Error: ${error.message}`); return; }
+      memoryId = data.id;
+    }
+
+    const checkedIds = Array.from(checkboxContainer.querySelectorAll('input[type="checkbox"]:checked')).map((cb) => cb.value);
+    if (checkedIds.length) {
+      await supabase.from('staff_memories_tags').insert(
+        checkedIds.map((staffId) => ({ memory_id: memoryId, staff_id: staffId }))
+      );
+    }
+
+    editingId = null;
+    form.reset();
+    checkboxContainer.querySelectorAll('input[type="checkbox"]').forEach((cb) => (cb.checked = false));
+    form.querySelector('.crud-submit').textContent = 'Add memory';
+    load();
+  });
+
+  load();
+}
+
+initStaffMemories();
