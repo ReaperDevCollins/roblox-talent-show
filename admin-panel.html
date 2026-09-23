@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Roblox Talent Show - Admin Panel</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -20,6 +20,7 @@
     <li><a href="homepage.html">Home</a></li>
     <li><a href="faq.html">FAQ</a></li>
     <li><a href="editors.html">Editors</a></li>
+    <li><a href="staff-memories.html">Staff Memories</a></li>
     <li><a href="staff.html">RTS Staff</a></li>
     <li><a href="departments.html">Departments</a></li>
     <li><a href="admin-panel.html" class="active">Admin Panel</a></li>
@@ -45,6 +46,7 @@
     <button class="tab-btn" data-tab="newspapers">Newspapers</button>
     <button class="tab-btn" data-tab="faqs">FAQ</button>
     <button class="tab-btn super-only" data-tab="editor-permissions" style="display:none;">Editor Permissions</button>
+    <button class="tab-btn" data-tab="staff-memories">Staff Memories</button>
   </div>
 
   <!-- Announcement -->
@@ -169,6 +171,20 @@
     <p id="permissions-status" class="panel-hint"></p>
     <div class="crud-list" id="editor-permissions-list"></div>
   </div>
+
+    <!-- Staff Memories -->
+    <div class="tab-panel" id="tab-staff-memories">
+      <h2>Staff memories management</h2>
+      <form id="memories-form" class="crud-form">
+        <input type="text" name="image_url" placeholder="Image URL" required>
+        <label class="date-label">Date taken <input type="date" name="date_taken" required></label>
+        <input type="number" name="sort_order" placeholder="Sort order" value="0">
+        <div class="field-group-label">Tag staff members in this photo</div>
+        <div id="memory-staff-checkboxes" class="checkbox-grid"></div>
+        <button type="submit" class="crud-submit">Add memory</button>
+      </form>
+      <div class="crud-list" id="memories-list"></div>
+    </div>
 
 </section>
 
