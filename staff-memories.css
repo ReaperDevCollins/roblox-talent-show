@@ -1,0 +1,118 @@
+.memories-hero {
+    background-image:
+      linear-gradient(180deg, rgba(21, 10, 36, 0.6) 0%, rgba(21, 10, 36, 0.85) 60%, var(--bg-deep) 100%),
+      url("firststaffpicture.png");
+  }
+  
+  .rainbow-divider {
+    width: 10rem;
+    height: 5px;
+    margin: 0 auto;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #e04b4b, #6fcf6f, var(--spotlight), #b98fe0, #6fd8e0);
+  }
+  
+  .memories-section {
+    background: #d9d9d9;
+    padding: 4rem 1.5rem;
+  }
+  
+  .memories-grid {
+    max-width: 70rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+  
+  @media (max-width: 900px) {
+    .memories-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .memories-grid { grid-template-columns: 1fr; }
+  }
+  
+  .memory-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    text-align: center;
+  }
+  
+  .memory-card:hover,
+  .memory-card:focus-visible {
+    transform: translateY(-3px);
+  }
+  
+  .memory-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .memory-card .memory-date {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bg-deep);
+  }
+  
+  /* ---------- Memory modal (reuses the dark .employee-modal theme) ---------- */
+  .memory-modal {
+    max-width: 40rem;
+  }
+  
+  .memory-modal img.memory-full-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .memory-modal .memory-date-large {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tagged-staff-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .tagged-staff-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+  }
+  
+  .tagged-staff-row img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .tagged-staff-row .tagged-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+  }
+  
+  .tagged-staff-row .tagged-username {
+    font-weight: 700;
+    color: var(--text-light);
+  }
+  
+  .tagged-staff-row .tagged-department {
+    color: var(--text-muted);
+  }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Talent Show - Staff Memories</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="homepage.css">
+<link rel="stylesheet" href="faq.css">
+<link rel="stylesheet" href="staff.css">
+<link rel="stylesheet" href="staff-memories.css">
+<link rel="stylesheet" href="announcement-banner.css">
+</head>
+<body>
+
+<div id="announcement-banner" class="announcement-banner" style="display:none;"></div>
+
+<nav class="site-nav">
+  <div class="nav-brand">RTS</div>
+  <ul class="nav-links">
+    <li><a href="homepage.html">Home</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="editors.html">Editors</a></li>
+    <li><a href="staff-memories.html" class="active">Staff Memories</a></li>
+    <li><a href="staff.html">RTS Staff</a></li>
+    <li><a href="departments.html">Departments</a></li>
+    <li><a href="admin-login.html">Admin Panel</a></li>
+    <li><a href="editor-login.html">Editor Panel</a></li>
+  </ul>
+</nav>
+
+<header class="page-hero memories-hero">
+  <h1 class="show-title">Roblox Talent Show</h1>
+  <p class="home-subtitle">Staff Memories</p>
+  <div class="rainbow-divider"></div>
+</header>
+
+<section class="memories-section">
+  <div class="memories-grid" id="memories-grid">
+    <p class="crud-empty">Loading memories...</p>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="employee-modal memory-modal" id="memory-modal">
+    <button class="modal-close" id="modal-close" aria-label="Close photo">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Roblox Talent Show. Created by ReaperDevCollins.</p>
+</footer>
+
+<script type="module" src="announcement-banner.js"></script>
+<script type="module" src="staff-memories.js"></script>
+</body>
+</html>
