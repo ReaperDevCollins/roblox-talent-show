@@ -38,6 +38,17 @@
   <div class="rainbow-divider"></div>
 </header>
 
+<section class="memories-controls-section">
+  <p class="memories-count" id="memories-count"></p>
+  <div class="controls-bar">
+    <select id="filter-year" class="filter-select">
+      <option value="">All years</option>
+    </select>
+    <input type="date" id="filter-exact-date" class="filter-select">
+    <button type="button" id="clear-date-filter" class="secondary-btn">Clear date filter</button>
+  </div>
+</section>
+
 <section class="memories-section">
   <div class="memories-grid" id="memories-grid">
     <p class="crud-empty">Loading memories...</p>
