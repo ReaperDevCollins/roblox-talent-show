@@ -116,3 +116,25 @@
   .tagged-staff-row .tagged-department {
     color: var(--text-muted);
   }
+
+  .memories-controls-section {
+    background: var(--curtain);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  
+  .memories-count {
+    color: var(--text-light);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  
+  .memories-controls-section .controls-bar {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+  
+  .memories-controls-section .secondary-btn {
+    border-color: var(--text-muted);
+    color: var(--text-light);
+  }
