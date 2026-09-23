@@ -27,23 +27,70 @@ async function loadMemories() {
   if (error) { grid.innerHTML = `<p class="crud-empty">${error.message}</p>`; return; }
   memories = data || [];
 
-  if (!memories.length) {
-    grid.innerHTML = '<p class="crud-empty">No memories have been added yet.</p>';
+  populateYearFilter();
+  applyFilters();
+}
+
+function populateYearFilter() {
+  const years = [...new Set(memories.map((m) => m.date_taken.slice(0, 4)))].sort();
+  const yearSelect = document.getElementById('filter-year');
+  yearSelect.innerHTML = '<option value="">All years</option>' +
+    years.map((y) => `<option value="${y}">${y}</option>`).join('');
+}
+
+function applyFilters() {
+  const year = document.getElementById('filter-year').value;
+  const exactDate = document.getElementById('filter-exact-date').value;
+
+  const filtered = memories.filter((m) => {
+    if (exactDate && m.date_taken !== exactDate) return false;
+    if (!exactDate && year && !m.date_taken.startsWith(year)) return false;
+    return true;
+  });
+
+  document.getElementById('memories-count').textContent =
+    `${filtered.length} ${filtered.length === 1 ? 'memory' : 'memories'} shown (${memories.length} total)`;
+
+  renderGrid(filtered);
+}
+
+function renderGrid(rows) {
+  const grid = document.getElementById('memories-grid');
+
+  if (!rows.length) {
+    grid.innerHTML = '<p class="crud-empty">No memories match this filter.</p>';
     return;
   }
 
-  grid.innerHTML = memories.map((m, i) => `
-    <div class="memory-card" tabindex="0" data-index="${i}">
+  grid.innerHTML = rows.map((m, i) => `
+    <div class="memory-card" tabindex="0" data-id="${m.id}">
       <img src="${m.image_url}" alt="Staff memory from ${formatDate(m.date_taken)}">
       <div class="memory-date">${formatDate(m.date_taken)}</div>
     </div>
   `).join('');
 
   grid.querySelectorAll('.memory-card').forEach((card) => {
-    card.addEventListener('click', () => openModal(memories[card.dataset.index]));
-    card.addEventListener('keypress', (e) => { if (e.key === 'Enter') openModal(memories[card.dataset.index]); });
+    const memory = rows.find((m) => m.id === card.dataset.id);
+    card.addEventListener('click', () => openModal(memory));
+    card.addEventListener('keypress', (e) => { if (e.key === 'Enter') openModal(memory); });
   });
 }
+
+document.getElementById('filter-year').addEventListener('change', () => {
+  document.getElementById('filter-exact-date').value = '';
+  applyFilters();
+});
+
+document.getElementById('filter-exact-date').addEventListener('change', () => {
+  document.getElementById('filter-year').value = '';
+  applyFilters();
+});
+
+document.getElementById('clear-date-filter').addEventListener('click', () => {
+  document.getElementById('filter-exact-date').value = '';
+  document.getElementById('filter-year').value = '';
+  applyFilters();
+});
 
 const overlay = document.getElementById('modal-overlay');
 const modalContent = document.getElementById('modal-content');
