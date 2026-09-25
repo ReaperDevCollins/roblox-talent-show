@@ -248,7 +248,15 @@ async function openModal(staff) {
   }
 
   html += `<hr class="full-divider"><h3>Notes</h3><p class="notes-text">${staff.notes || 'No notes on file.'}</p>`;
-
+  
+  const pastUsernames = staff.past_usernames || [];
+  if (pastUsernames.length) {
+    html += `
+      <hr class="full-divider">
+      <h3>Past usernames</h3>
+      <p class="notes-text">${pastUsernames.map((p) => p.username).join(', ')}</p>
+    `;
+  }
   modalContent.innerHTML = html;
   overlay.classList.add('open');
 }
