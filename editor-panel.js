@@ -67,17 +67,35 @@ async function loadStaff() {
       primary_department:primary_department_id(name),
       current_rank:current_rank_id(name),
       secondary_department:secondary_department_id(name),
-      secondary_rank:secondary_rank_id(name)
+      secondary_rank:secondary_rank_id(name),
+      past_usernames:staff_past_usernames(username)
     `)
     .order('username');
 
-  if (error) { staffList.innerHTML = `<p class="crud-empty">${error.message}</p>`; return; }
-  staffMembers = data || [];
-  renderStaffList(staffMembers);
-  fillStaffSelects(staffMembers);
-}
-
-function renderStaffList(rows) {
+    if (error) { staffList.innerHTML = `<p class="crud-empty">${error.message}</p>`; return; }
+    staffMembers = data || [];
+    renderStaffList(staffMembers);
+    fillStaffSelects(staffMembers);
+  }
+  
+  document.getElementById('staff-search-input').addEventListener('input', (e) => {
+    const search = e.target.value.trim().toLowerCase();
+  
+    if (!search) {
+      renderStaffList(staffMembers);
+      return;
+    }
+  
+    const filtered = staffMembers.filter((s) => {
+      const matchesCurrent = s.username.toLowerCase().includes(search);
+      const matchesPast = (s.past_usernames || []).some((p) => p.username.toLowerCase().includes(search));
+      return matchesCurrent || matchesPast;
+    });
+  
+    renderStaffList(filtered);
+  });
+  
+  function renderStaffList(rows) {
   if (!rows.length) { staffList.innerHTML = '<p class="crud-empty">No staff members yet.</p>'; return; }
 
   staffList.innerHTML = rows.map((s) => `
