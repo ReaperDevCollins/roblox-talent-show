@@ -138,6 +138,7 @@ function resetStaffForm() {
   staffForm.querySelector('.crud-submit').textContent = 'Add staff member';
   cancelEditBtn.style.display = 'none';
   pastDeptEditor.style.display = 'none';
+  pastUsernamesEditor.style.display = 'none';
 }
 
 cancelEditBtn.addEventListener('click', resetStaffForm);
