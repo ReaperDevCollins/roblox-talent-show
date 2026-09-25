@@ -45,8 +45,7 @@ async function loadStaff() {
       primary_department:primary_department_id(name, color, logo_url),
       current_rank:current_rank_id(name, icon_url),
       secondary_department:secondary_department_id(name, color, logo_url),
-      secondary_rank:secondary_rank_id(name, icon_url),
-      past_usernames:staff_past_usernames(username)
+      secondary_rank:secondary_rank_id(name, icon_url)
     `);
   allStaff = data || [];
 }
@@ -278,11 +277,7 @@ function applyFilters() {
   const year = document.getElementById('filter-year').value;
 
   const filtered = allStaff.filter((s) => {
-    if (search) {
-      const matchesCurrent = s.username.toLowerCase().includes(search);
-      const matchesPast = (s.past_usernames || []).some((p) => p.username.toLowerCase().includes(search));
-      if (!matchesCurrent && !matchesPast) return false;
-    }
+    if (search && !s.username.toLowerCase().includes(search)) return false;
     if (dept && s.primary_department_id !== dept) return false;
     if (status && s.status?.name !== status) return false;
     if (rank && s.current_rank_id !== rank) return false;
