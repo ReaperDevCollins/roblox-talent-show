@@ -85,13 +85,23 @@
       </div>
       <p class="panel-hint">These update automatically from the Staff Recognition tab — only change them here to correct a mistake.</p>
 
-      <textarea name="notes" placeholder="Notes (visible in employee file)"></textarea>
+          <textarea name="notes" placeholder="Notes (visible in employee file)"></textarea>
 
       <div class="form-actions">
         <button type="submit" class="crud-submit">Add staff member</button>
         <button type="button" id="cancel-edit-staff" class="secondary-btn" style="display:none;">Cancel edit</button>
       </div>
     </form>
+
+    <!-- Past usernames editor, appears only while editing an existing staff member -->
+    <div id="past-usernames-editor" class="past-dept-editor" style="display:none;">
+      <h3>Past usernames for this staff member</h3>
+      <div id="past-usernames-list" class="crud-list"></div>
+      <form id="past-username-form" class="crud-form compact">
+        <input type="text" name="username" placeholder="Previous username" required>
+        <button type="submit" class="crud-submit">Add username</button>
+      </form>
+    </div>
 
     <!-- Past departments editor, appears only while editing an existing staff member -->
     <div id="past-departments-editor" class="past-dept-editor" style="display:none;">
