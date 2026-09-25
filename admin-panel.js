@@ -268,41 +268,13 @@ async function initStaffMemories() {
   const form = document.getElementById('memories-form');
   const listEl = document.getElementById('memories-list');
   const checkboxContainer = document.getElementById('memory-staff-checkboxes');
-  const searchInput = document.getElementById('memory-staff-search');
   let editingId = null;
-  let selectedIds = new Set();
 
-  const { data: allStaffForTagging } = await supabase
-    .from('staff')
-    .select('id, username, past_usernames:staff_past_usernames(username)')
-    .order('username');
+  const { data: allStaffForTagging } = await supabase.from('staff').select('id, username').order('username');
 
-  function renderCheckboxes(filterText = '') {
-    const f = filterText.toLowerCase();
-    const filtered = (allStaffForTagging || []).filter((s) => {
-      if (!f) return true;
-      const matchesCurrent = s.username.toLowerCase().includes(f);
-      const matchesPast = (s.past_usernames || []).some((p) => p.username.toLowerCase().includes(f));
-      return matchesCurrent || matchesPast;
-    });
-
-    checkboxContainer.innerHTML = filtered.map((s) => {
-      const pastNote = s.past_usernames && s.past_usernames.length
-        ? ` (formerly ${s.past_usernames.map((p) => p.username).join(', ')})`
-        : '';
-      return `<label><input type="checkbox" value="${s.id}" ${selectedIds.has(s.id) ? 'checked' : ''}> ${s.username}${pastNote}</label>`;
-    }).join('');
-
-    checkboxContainer.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
-      cb.addEventListener('change', () => {
-        if (cb.checked) selectedIds.add(cb.value);
-        else selectedIds.delete(cb.value);
-      });
-    });
-  }
-
-  renderCheckboxes();
-  searchInput.addEventListener('input', (e) => renderCheckboxes(e.target.value));
+  checkboxContainer.innerHTML = (allStaffForTagging || []).map((s) => `
+    <label><input type="checkbox" value="${s.id}"> ${s.username}</label>
+  `).join('');
 
   async function load() {
     const { data, error } = await supabase
@@ -339,9 +311,10 @@ async function initStaffMemories() {
         form.date_taken.value = row.date_taken;
         form.sort_order.value = row.sort_order;
 
-        selectedIds = new Set((row.tags || []).map((t) => t.staff_id));
-        searchInput.value = '';
-        renderCheckboxes();
+        const taggedIds = (row.tags || []).map((t) => t.staff_id);
+        checkboxContainer.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+          cb.checked = taggedIds.includes(cb.value);
+        });
 
         form.querySelector('.crud-submit').textContent = 'Save changes';
         form.scrollIntoView({ behavior: 'smooth' });
@@ -376,7 +349,7 @@ async function initStaffMemories() {
       memoryId = data.id;
     }
 
-    const checkedIds = Array.from(selectedIds);
+    const checkedIds = Array.from(checkboxContainer.querySelectorAll('input[type="checkbox"]:checked')).map((cb) => cb.value);
     if (checkedIds.length) {
       await supabase.from('staff_memories_tags').insert(
         checkedIds.map((staffId) => ({ memory_id: memoryId, staff_id: staffId }))
@@ -385,9 +358,7 @@ async function initStaffMemories() {
 
     editingId = null;
     form.reset();
-    selectedIds = new Set();
-    searchInput.value = '';
-    renderCheckboxes();
+    checkboxContainer.querySelectorAll('input[type="checkbox"]').forEach((cb) => (cb.checked = false));
     form.querySelector('.crud-submit').textContent = 'Add memory';
     load();
   });
