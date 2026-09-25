@@ -228,6 +228,49 @@ pastDeptForm.addEventListener('submit', async (e) => {
   loadPastDepartments(editingStaffId);
 });
 
+/* ---------- Past usernames (per staff member being edited) ---------- */
+async function loadPastUsernames(staffId) {
+  const { data, error } = await supabase
+    .from('staff_past_usernames')
+    .select('*')
+    .eq('staff_id', staffId)
+    .order('created_at');
+
+  if (error) { pastUsernamesList.innerHTML = `<p class="crud-empty">${error.message}</p>`; return; }
+
+  if (!data.length) { pastUsernamesList.innerHTML = '<p class="crud-empty">No past usernames recorded.</p>'; return; }
+
+  pastUsernamesList.innerHTML = data.map((p) => `
+    <div class="crud-row" data-id="${p.id}">
+      <div class="crud-row-info"><span><strong>${p.username}</strong></span></div>
+      <div class="crud-row-actions"><button class="delete-btn">Delete</button></div>
+    </div>
+  `).join('');
+
+  pastUsernamesList.querySelectorAll('.delete-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.closest('.crud-row').dataset.id;
+      if (!confirm('Delete this past username?')) return;
+      await supabase.from('staff_past_usernames').delete().eq('id', id);
+      loadPastUsernames(staffId);
+    });
+  });
+}
+
+pastUsernameForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!editingStaffId) return;
+
+  const { error } = await supabase.from('staff_past_usernames').insert({
+    staff_id: editingStaffId,
+    username: pastUsernameForm.username.value,
+  });
+
+  if (error) { alert(`Error: ${error.message}`); return; }
+  pastUsernameForm.reset();
+  loadPastUsernames(editingStaffId);
+});
+
 /* ---------- Staff Recognition (STOW / STOM) ---------- */
 function fillStaffSelects(rows) {
   const options = `<option value="">Select staff member</option>` +
