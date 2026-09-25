@@ -53,6 +53,8 @@ const pastUsernamesEditor = document.getElementById('past-usernames-editor');
 const pastUsernamesList = document.getElementById('past-usernames-list');
 const pastUsernameForm = document.getElementById('past-username-form');
 const pastDeptEditor = document.getElementById('past-departments-editor');
+const pastDeptList = document.getElementById('past-departments-list');
+const pastDeptForm = document.getElementById('past-department-form');
 
 let editingStaffId = null;
 
