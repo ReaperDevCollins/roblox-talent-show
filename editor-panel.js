@@ -126,7 +126,9 @@ function loadStaffIntoForm(staff) {
   staffForm.querySelector('.crud-submit').textContent = 'Save changes';
   cancelEditBtn.style.display = 'inline-block';
   pastDeptEditor.style.display = 'block';
+  pastUsernamesEditor.style.display = 'block';
   loadPastDepartments(staff.id);
+  loadPastUsernames(staff.id);
   staffForm.scrollIntoView({ behavior: 'smooth' });
 }
 
